@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import vuex from 'vuex';
-const vue_demo = new Vue({
-    el:"root"
-})
- export default vue_demo;
+import App from './App';
+
+export default new Vue({
+    components:{
+        App
+    }  
+}).$mount("#root")
+  
