@@ -30,7 +30,8 @@ module.exports ={
             exclude: /node_modules/, //处理除了nodde_modules里的js文件
             loader: 'babel-loader', //用babel-loader处理
             include: [resolve('src'), resolve('/node_modules/iview/src'), resolve('/node_modules/iview/packages')],
-          }
+          },
+          { test: /\.(ttf|eot|svg|woff|woff2)$/, use: 'url-loader' },
         ]
       },
       plugins: [new HtmlWebpackPlugin({

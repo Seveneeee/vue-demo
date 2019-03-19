@@ -12,6 +12,9 @@
   "author": "Seven_ya",
   "license": "ISC",
   "dependencies": {
+    "element-ui": "^2.6.1",
+    "iview": "^3.3.2",
+    "url-loader": "^1.1.2",
     "vue": "^2.6.9",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0"
