@@ -1,21 +1,23 @@
 <template>
     <div class="layout">
-        <Layout>
+        <Layout style="height:100%">
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                     <MenuItem  v-for="item in introduce" :name='item.key'>
+                <Menu active-name="1-1" theme="dark" width="auto" :class="menuitemClasses" @on-select="changeTitle">
+                     <router-link v-for="item in introduce" :to="item.path">   
+                     <MenuItem   :name='item.key'>
                         <Icon :type="item.type"></Icon>
                         <span>{{item.name}}</span>
                     </MenuItem>
+                    </router-link>
                 </Menu>
             </Sider>
             <Layout>
                 <Header :style="{padding: 0,display:'flex'}" class="layout-header-bar">
                     <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px',cursor:'pointer'}" type="md-menu" size="24"></Icon>
-                    <h3 class="title">首页</h3>
+                    <h3 class="title">{{title}}</h3>
                 </Header>
                 <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    Content
+                     <router-view></router-view>
                 </Content>
             </Layout>
         </Layout>
@@ -27,11 +29,11 @@ import  introduce from '../../data.js'
         data () {
             return {
                 isCollapsed: true,
-                introduce
+                introduce,
+                title:introduce[0]["name"]
             }
         },
         mounted() {
-            console.log(introduce)
         },
         computed: {
             rotateIcon () {
@@ -50,7 +52,21 @@ import  introduce from '../../data.js'
         methods: {
             collapsedSider () {
                 this.$refs.side1.toggleCollapse();
+            },
+            //切换标题
+            changeTitle(to) {
+                    for(let item of this.introduce){
+                    if(item.path == to.name) {
+                        this.title = item.name;
+                        console.log(this.title)
+                        break;
+                        }
+                }
             }
+        },
+        beforeRouteUpdate (to){
+            this.changeTitle(to)
+            console.log(to)
         }
     }
 </script>
@@ -61,6 +77,7 @@ import  introduce from '../../data.js'
         text-align:center;
     }
     .layout{
+        height:100%;
         border: 1px solid #d7dde4;
         background: #f5f7f9;
         position: relative;
@@ -108,5 +125,8 @@ import  introduce from '../../data.js'
         transition: font-size .2s ease .2s, transform .2s ease .2s;
         vertical-align: middle;
         font-size: 22px;
+    }
+    .ivu-menu-item{
+        height:49px;
     }
 </style>
