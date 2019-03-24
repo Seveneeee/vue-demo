@@ -4,23 +4,11 @@
     </div>
 </template>
 <script>
+import Event from '../../commonApi/bus.js'
 export default {
-    // data() {
-    //     return {
-    //         title:"专业技能"
-    //     }
-    // },
-    // mounted() {
-    //     this.changeTitle()
-    // },
-    // methods: {
-    //      changeTitle() {
-    //             this.$emit("changeTitle",this.title)
-    //         }
-    // },
-    beforeMount() {
-        console.log("aa")
-    },
+   created(){
+       Event.$emit("changeTitle","专业技能")
+   }
 }
 </script>
 <style lang="">
